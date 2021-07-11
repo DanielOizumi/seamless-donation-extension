@@ -1,0 +1,141 @@
+#admin-seamless-donations-form h2{
+	margin-top: 20px;
+}
+#admin-seamless-donations-form input[type="text"]{
+	width: 100%;
+	margin-bottom: 10px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+#_dgx_donate_honoree_name,
+#_dgx_donate_memorial_gift{
+	margin-top: 10px;
+}
+#_dgx_donate_anonymous,
+#_dgx_donate_add_to_mailing_list {
+	margin: 20px 0;
+}
+#admin-seamless-donations-form input[type="submit"] {
+	padding: 14px 12px;
+	color: #fff;
+	background-color: #5dc269;
+	margin-bottom: 10px;
+	display: inline-block;
+	text-align: center;
+	font-weight: bold;
+	box-sizing: border-box;
+	width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+/*Image Upload*/
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+	padding: 14px 12px;
+	color: #6d5b1c;
+	background-color: #fec428;
+	margin-bottom: 10px;
+	display: inline-block;
+	text-align: center;
+	font-weight: bold;
+	box-sizing: border-box;
+	width: 100%;
+}
+.inputfile.loaded + label,
+.inputfile:focus + label,
+.inputfile + label:hover {
+	color: #fff;
+	background-color: #5dc269;
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+.inputfile + label * {
+	pointer-events: none;
+}
+
+/* Burkina Modal */
+/* Background */
+.burkina-modal {
+	position: fixed; /* Stay in place */
+	z-index: 1000; /* Sit on top */
+	left: -10000px;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: rgb(0,0,0)!important; /* Fallback color */
+	background-color: rgba(0,0,0,0.98)!important; /* Black w/ opacity */
+}
+/* Modal Content/Box */
+.burkina-modal-content {
+	margin: auto;
+	padding: 30px;
+	width: 80%; /* Could be more or less, depending on screen size */
+	position: relative;
+}
+/* Image Cropper Modal */
+#image_prev_modal .burkina-modal-content {
+	border: 1px solid #888;
+}
+#image_prev_modal #image_prev_modal{
+	background-color: rgb(0,0,0)!important; /* Fallback color */
+	background-color: rgba(0,0,0,0.98)!important; /* Black w/ opacity */
+}
+#image_prev_modal .jcrop-holder{
+	margin: auto;
+}
+#image_prev_modal .image_prev_button {
+	text-align: center;
+	padding-top: 10px;
+}
+#image_prev_modal .image_prev_button span {
+	padding: 14px 12px;
+	color: #fff;
+	background-color: #5dc269;
+	margin-bottom: 10px;
+	display: inline-block;
+	text-align: center;
+	font-weight: bold;
+	box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+}
+
+/* Loading Modal */
+/* Modal Content */
+#image_loading_container {
+    top: calc(50% - 120px);
+    width: 120px;
+}
+#image_loading {
+  border: 16px solid #fec428;
+  border-radius: 50%;
+  border-top: 16px solid #6d5b1c;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
