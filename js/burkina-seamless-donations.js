@@ -1,3 +1,6 @@
+/**
+ * JS Seameless Donation Extension for frontend user
+ */
 (function($) {
 	//add donation menu
 	$('#greennature-main-navigation').append('<a class="greennature-donate-button" href="donate"><span class="greennature-button-overlay"></span><span class="greennature-button-donate-text">Join the Challenge</span></a>');

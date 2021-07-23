@@ -1,3 +1,6 @@
+/**
+ * JS Seameless Donation Extension for backend user
+ */
 (function($) {
 	//Fix footer
     $('#wpfooter').hide();

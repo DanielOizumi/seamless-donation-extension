@@ -1,15 +1,16 @@
 <?php
-if (!class_exists('WP_List_Table')) {
-    require_once(ABSPATH . 'wp-admin/includes/class-wp-list-table.php');
+if ( ! class_exists( 'WP_List_Table' ) ) {
+    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 }
 /**
-* burkina_seamless_donations_List_Table class that will display our custom table
-*/
+ * Burkina_seamless_donations_List_Table class that will display our custom table
+ * This class was copied from somewhere but I can't rememeber where from
+ */
 class burkina_seamless_donations_List_Table extends WP_List_Table
 {
     /**
-    * [REQUIRED] You must declare constructor and give some basic params
-    */
+     * [REQUIRED] Declare constructor and give some basic params
+     */
     function __construct()
     {
         global $status, $page;
@@ -40,9 +41,9 @@ class burkina_seamless_donations_List_Table extends WP_List_Table
     * @param $item - row (key, value array)
     * @return HTML
     */
-    function column_amount($item)
+    function column_amount( $item )
     {
-        return '<em>' . number_format(intval($item['amount']),2,",",".") . '</em>';
+        return '<em>' . number_format( intval( $item['amount'] ), 2, ",", ".") . '</em>';
     }
 
     /**
@@ -52,7 +53,7 @@ class burkina_seamless_donations_List_Table extends WP_List_Table
     * @param $item - row (key, value array)
     * @return HTML
     */
-    function column_fname($item)
+    function column_fname( $item )
     {
         /*
         // links going to /admin.php?page=[your_plugin_page][&other_params]
@@ -82,10 +83,10 @@ class burkina_seamless_donations_List_Table extends WP_List_Table
     {
         $columns = array(
             'bsd_id' => 'ID',
-            'fname' => 'Name',
-            'lname' => 'Last Name',
-            'email' => 'E-Mail',
-            'phone' => 'Phone',
+            'fname'  => 'Name',
+            'lname'  => 'Last Name',
+            'email'  => 'E-Mail',
+            'phone'  => 'Phone',
             'amount' => 'Amount',
         );
         return $columns;
@@ -102,10 +103,10 @@ class burkina_seamless_donations_List_Table extends WP_List_Table
     {
         $sortable_columns = array(
             'bsd_id' => array('bsd_id', true),
-            'fname' => array('fname', false),
-            'lname' => array('lname', false),
-            'email' => array('email', false),
-            'phone' => array('phone', false),
+            'fname'  => array('fname', false),
+            'lname'  => array('lname', false),
+            'email'  => array('email', false),
+            'phone'  => array('phone', false),
             'amount' => array('amount', false),
         );
         return $sortable_columns;
@@ -167,28 +168,28 @@ class burkina_seamless_donations_List_Table extends WP_List_Table
         $sortable = $this->get_sortable_columns();
 
         // here we configure table headers, defined in our methods
-        $this->_column_headers = array($columns, $hidden, $sortable);
+        $this->_column_headers = array( $columns, $hidden, $sortable );
 
         // [OPTIONAL] process bulk action if any
         $this->process_bulk_action();
 
         // will be used in pagination settings
-        $total_items = $wpdb->get_var("SELECT COUNT(bsd_id) FROM $table_name");
+        $total_items = $wpdb->get_var( "SELECT COUNT(bsd_id) FROM $table_name" );
 
         // prepare query params, as usual current page, order by and order direction
-        $paged = isset($_REQUEST['paged']) ? ($per_page * max(0, intval($_REQUEST['paged']) - 1)) : 0;
-        $orderby = (isset($_REQUEST['orderby']) && in_array($_REQUEST['orderby'], array_keys($this->get_sortable_columns()))) ? $_REQUEST['orderby'] : 'bsd_id';
-        $order = (isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('asc', 'desc'))) ? $_REQUEST['order'] : 'desc';
+        $paged = isset( $_REQUEST['paged'] ) ? ( $per_page * max( 0, intval( $_REQUEST['paged'] ) - 1) ) : 0;
+        $orderby = ( isset( $_REQUEST['orderby'] ) && in_array( $_REQUEST['orderby'], array_keys( $this->get_sortable_columns() ) ) ) ? $_REQUEST['orderby'] : 'bsd_id';
+        $order = ( isset( $_REQUEST['order'] ) && in_array( $_REQUEST['order'], array( 'asc', 'desc' ) ) ) ? $_REQUEST['order'] : 'desc';
 
         // [REQUIRED] define $items array
         // notice that last argument is ARRAY_A, so we will retrieve array
-        $this->items = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name ORDER BY $orderby $order LIMIT %d OFFSET %d", $per_page, $paged), ARRAY_A);
+        $this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM $table_name ORDER BY $orderby $order LIMIT %d OFFSET %d", $per_page, $paged ), ARRAY_A );
 
         // [REQUIRED] configure pagination
-        $this->set_pagination_args(array(
+        $this->set_pagination_args( array(
             'total_items' => $total_items, // total items defined above
-            'per_page' => $per_page, // per page constant defined at top of method
-            'total_pages' => ceil($total_items / $per_page) // calculate pages count
+            'per_page'    => $per_page, // per page constant defined at top of method
+            'total_pages' => ceil( $total_items / $per_page ) // calculate pages count
         ));
     }
 }
@@ -209,15 +210,15 @@ $table = new burkina_seamless_donations_List_Table();
 $table->prepare_items();
 
 $message = '';
-if ('delete' === $table->current_action()) {
-    $message = '<div class="updated below-h2" id="message"><p>' . sprintf(__('Items deleted: %d', 'burkina-seamless-donations'), count($_REQUEST['id'])) . '</p></div>';
+if ( 'delete' === $table->current_action() ) {
+    $message = '<div class="updated below-h2" id="message"><p>' . sprintf( __( 'Items deleted: %d', 'burkina-seamless-donations' ), count( $_REQUEST['id'] ) ) . '</p></div>';
 }
 ?>
 <div class="wrap">
 
     <div class="icon32 icon32-posts-post" id="icon-edit"><br></div>
-    <h2><?php _e('Persons', 'burkina-seamless-donations')?> <a class="add-new-h2"
-        href="<?php echo get_admin_url(get_current_blog_id(), 'admin.php?page=persons_form');?>"><?php _e('Add new', 'burkina-seamless-donations')?></a>
+    <h2><?php _e( 'Persons', 'burkina-seamless-donations' )?> <a class="add-new-h2"
+        href="<?php echo get_admin_url( get_current_blog_id(), 'admin.php?page=persons_form' );?>"><?php _e( 'Add new', 'burkina-seamless-donations' )?></a>
     </h2>
     <?php echo $message; ?>
 
